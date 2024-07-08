@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-
     private PlayerAction playerAction;
     private Rigidbody rb;
 
     ///////////////////////////////////
-    ///// Move
+    ///// Move, Rotate
     public float moveSpeed = 5f;
+    public float rotateSpeed = 10f; // 회전 속도
     public float jumpForce = 5f;
     Vector2 inputVector;
     Vector3 moveVector;
@@ -28,7 +28,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Vector3 defaultPosition;
     [SerializeField] private Vector3 defaultRotation;
 
-    [SerializeField] private bool isFirstPerson = false;
+    public bool isFirstPerson = false;
 
     private void Awake()
     {
@@ -40,21 +40,18 @@ public class PlayerMove : MonoBehaviour
 
         playerAction.Player.Jump.started += OnJump;
 
-        playerAction.Player.Look.started += HandleLook;
+        //playerAction.Player.Look.started += HandleLook;
 
         rb = GetComponent<Rigidbody>();
     }
 
     void Start()
     {
-        cameraObj = this.GetComponentInChildren<Camera>().gameObject;
-        defaultPosition = cameraObj.transform.position;
-        defaultRotation = cameraObj.transform.localEulerAngles;
     }
 
     void Update()
     {
-        transform.Translate(moveVector.normalized * Time.deltaTime * moveSpeed);
+        PlayerMovement();
         CheckGroundStatus();
     }
 
@@ -73,17 +70,32 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public void HandleLook(InputAction.CallbackContext value)
+    private void PlayerMovement()
     {
-        isFirstPerson = !isFirstPerson;
-
-        if (cameraObj != null)
+        if (moveVector != Vector3.zero)
         {
-            cameraObj.GetComponent<Transform>().position = isFirstPerson ? firstPersonTransform.position : defaultPosition;
-            cameraObj.GetComponent<Transform>().eulerAngles = isFirstPerson ? Vector3.zero : defaultRotation;
-                
+            // Move the player
+            Vector3 movement = moveVector.normalized * moveSpeed * Time.deltaTime;
+            transform.Translate(movement, Space.World);
+
+            // Calculate target rotation
+            Quaternion targetRotation = Quaternion.LookRotation(moveVector);
+
+            // Smoothly rotate towards the target rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
         }
     }
+
+    // public void HandleLook(InputAction.CallbackContext value)
+    // {
+    //     isFirstPerson = !isFirstPerson;
+
+    //     if (cameraObj != null)
+    //     {
+    //         cameraObj.GetComponent<Transform>().position = isFirstPerson ? firstPersonTransform.position : defaultPosition;
+    //         cameraObj.GetComponent<Transform>().eulerAngles = isFirstPerson ? Vector3.zero : defaultRotation;
+    //     }
+    // }
 
     // Default : Enable
     private void OnEnable()
