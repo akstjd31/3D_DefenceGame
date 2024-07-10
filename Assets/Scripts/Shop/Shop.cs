@@ -8,6 +8,8 @@ public class Shop : MonoBehaviour
     private GameObject shopCanvas;
     private GameObject shopDisplay;
 
+    public bool isUIActive = false;
+
     private void Start()
     {
         shopCanvas = GameObject.FindGameObjectWithTag("ShopCanvas");
@@ -17,10 +19,20 @@ public class Shop : MonoBehaviour
     public void Open()
     {
         shopDisplay.SetActive(true);
+        isUIActive = true;
+        SetCursorVisibility(isUIActive);
     }
 
     public void Close()
     {
         shopDisplay.SetActive(false);
+        isUIActive = false;
+        SetCursorVisibility(!isUIActive);
+    }
+
+    private void SetCursorVisibility(bool isVisible)
+    {
+        Cursor.visible = isVisible;
+        Cursor.lockState = isVisible ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }

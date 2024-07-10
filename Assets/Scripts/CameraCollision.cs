@@ -34,13 +34,16 @@ public class CameraCollision : MonoBehaviour
         Vector3 dirTmp = parentTransform.TransformPoint(defaultPos) - referenceTransform.position;
         if (Physics.SphereCast(referenceTransform.position, collisionOffset, dirTmp, out hit, defaultDistance))
         {
-            currentPos = (directionNormalized * (hit.distance - collisionOffset));
-
-            transform.localPosition = currentPos;
+            // Adjust the camera position based on collision, but maintain the center position
+            float distance = Mathf.Clamp(hit.distance - collisionOffset, 0, defaultDistance);
+            currentPos = directionNormalized * distance;
         }
         else
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, currentPos, Time.deltaTime * cameraSpeed);
+            currentPos = defaultPos;
         }
+
+        // Smooth transition to the target position
+        transform.localPosition = Vector3.Lerp(transform.localPosition, currentPos, Time.deltaTime * cameraSpeed);
     }
 }
