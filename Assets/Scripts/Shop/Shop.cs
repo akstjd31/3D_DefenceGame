@@ -10,6 +10,20 @@ public class Shop : MonoBehaviour
 
     public bool isUIActive = false;
 
+    ///////////////////////////////
+    // structure
+    public StructureSO structureSO;
+    [SerializeField] private List<Structure> structures;
+
+    private void Awake()
+    {
+        foreach (Structure structure in structureSO.structures)
+        {
+            structures.Add(structure);
+        } 
+    }
+
+
     private void Start()
     {
         shopCanvas = GameObject.FindGameObjectWithTag("ShopCanvas");

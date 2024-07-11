@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Fortress", menuName = "Scriptable Object/Fortress", order = int.MaxValue)]
-public class Fortress : ScriptableObject
+[CreateAssetMenu(fileName = "Structure", menuName = "Scriptable Object/Structure", order = int.MaxValue)]
+public class Structure : ScriptableObject
 {
     public Transform prefab;
     public float depensive;

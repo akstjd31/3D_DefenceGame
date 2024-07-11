@@ -5,25 +5,25 @@ using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
 {
-    public GameObject fortressWindow, weaponWindow;
-    public Image fortressButtonImage, weaponButtonImage;
+    public GameObject structureWindow, weaponWindow;
+    public Image structureButtonImage, weaponButtonImage;
 
     public void OnClickFortressButton()
     {
-        fortressWindow.SetActive(true);
+        structureWindow.SetActive(true);
         weaponWindow.SetActive(false);
 
-        SetButtonAlpha(fortressButtonImage, 1f);
+        SetButtonAlpha(structureButtonImage, 1f);
         SetButtonAlpha(weaponButtonImage, 0.5f);
     }
 
     public void OnClickWeaponButton()
     {
         weaponWindow.SetActive(true);
-        fortressWindow.SetActive(false);
+        structureWindow.SetActive(false);
 
         SetButtonAlpha(weaponButtonImage, 1f);
-        SetButtonAlpha(fortressButtonImage, 0.5f);
+        SetButtonAlpha(structureButtonImage, 0.5f);
     }
 
     void SetButtonAlpha(Image buttonImage, float alpha)
