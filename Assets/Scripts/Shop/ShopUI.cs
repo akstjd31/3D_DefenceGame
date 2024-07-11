@@ -13,15 +13,8 @@ public class ShopUI : MonoBehaviour
         fortressWindow.SetActive(true);
         weaponWindow.SetActive(false);
 
-        fortressButtonImage.color = new Color(fortressButtonImage.color.r,
-                                            fortressButtonImage.color.g,
-                                            fortressButtonImage.color.b,
-                                            255);
-
-        weaponButtonImage.color = new Color(weaponButtonImage.color.r,
-                                            weaponButtonImage.color.g,
-                                            weaponButtonImage.color.b,
-                                            150);           
+        SetButtonAlpha(fortressButtonImage, 1f);
+        SetButtonAlpha(weaponButtonImage, 0.5f);
     }
 
     public void OnClickWeaponButton()
@@ -29,14 +22,14 @@ public class ShopUI : MonoBehaviour
         weaponWindow.SetActive(true);
         fortressWindow.SetActive(false);
 
-        weaponButtonImage.color = new Color(weaponButtonImage.color.r,
-                                            weaponButtonImage.color.g,
-                                            weaponButtonImage.color.b,
-                                            255);  
+        SetButtonAlpha(weaponButtonImage, 1f);
+        SetButtonAlpha(fortressButtonImage, 0.5f);
+    }
 
-        fortressButtonImage.color = new Color(fortressButtonImage.color.r,
-                                            fortressButtonImage.color.g,
-                                            fortressButtonImage.color.b,
-                                            150);
+    void SetButtonAlpha(Image buttonImage, float alpha)
+    {
+        Color color = buttonImage.color;
+        color.a = alpha;
+        buttonImage.color = color;
     }
 }
