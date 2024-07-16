@@ -116,26 +116,24 @@ public class Shop : MonoBehaviour
         }
 
         // epic
-        else if (3f < randomRatingProbability && randomRatingProbability <= 10f)
+        else if (3f <= randomRatingProbability && randomRatingProbability <= 10f)
         {
             randIdx = Random.Range(0, epicStructure.Count);
             return epicStructure[randIdx];
         }
 
         // rare
-        else if (11f < randomRatingProbability && randomRatingProbability <= 30f)
+        else if (11f <= randomRatingProbability && randomRatingProbability <= 30f)
         {
             randIdx = Random.Range(0, rareStructure.Count);
             return rareStructure[randIdx];
         }
 
         // common
-        else if (31f < randomRatingProbability && randomRatingProbability <= 100f)
+        else
         {
             randIdx = Random.Range(0, commonStructure.Count);
             return commonStructure[randIdx];
         }
-
-        return null;
     }
 }

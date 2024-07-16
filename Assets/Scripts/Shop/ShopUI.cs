@@ -15,7 +15,7 @@ public class ShopUI : MonoBehaviour
     {
         shop = GameObject.FindGameObjectWithTag("Shop").GetComponent<Shop>();
     }
-    
+
     public void OnClickStructureButton()
     {
         structureWindow.SetActive(true);
@@ -50,7 +50,7 @@ public class ShopUI : MonoBehaviour
             StructureUI structureUI = prefab.GetComponent<StructureUI>();
 
             // structure info
-            structureUI.SetStructure(shop.RandomStructureReturner()); 
+            structureUI.SetStructure(shop.RandomStructureReturner());
             shop.AddDisplayStructure(structureUI.GetStructure());
         }
 
@@ -61,12 +61,11 @@ public class ShopUI : MonoBehaviour
     public void ClearDisplayItems()
     {
         shop.ClearDisplayStructure();
-        
+
         // Clear content child
-        while (structureContent.transform.childCount > 0)
+        foreach (Transform child in structureContent.transform)
         {
-            GameObject structure = structureContent.transform.GetChild(0).gameObject;
-            Destroy(structure);
+            Destroy(child.gameObject);
         }
     }
 }
