@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "StructureSO", menuName = "Scriptable Object/StructureSO", order = int.MaxValue)]
 public class StructureSO : ScriptableObject
 {
-    public Structure[] structures;
+    public List<Structure> structures;
 }

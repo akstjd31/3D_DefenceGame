@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48b0d243d31614e249dacbc94e65d904, type: 3}
-  m_Name: Cube
+  m_Name: Cylinder
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6098190845475309939, guid: 101d6a0c395fa487ea9a9b506a1968af, type: 3}
-  name: Cube
-  depensive: 3
+  prefab: {fileID: 1972860297041908453, guid: dfcade27c89114f58a97c34dd6b56725, type: 3}
+  name: Cylinder
+  depensive: 40
   attack: 0
   attackSpeed: 0
-  durability: 10
-  cost: 1
-  ratingTable: 0
+  durability: 40
+  cost: 15
+  ratingTable: 3

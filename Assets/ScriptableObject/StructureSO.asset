@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: StructureSO
   m_EditorClassIdentifier: 
   structures:
+  - {fileID: 11400000, guid: 0c6a888eaa0d8493088ada72b8c48149, type: 2}
   - {fileID: 11400000, guid: e9dd37a76c0ab4c5c92bdf46d128ccfe, type: 2}
+  - {fileID: 11400000, guid: 02af32f7446714da39f776353562de98, type: 2}
+  - {fileID: 11400000, guid: 457d67968dddd4864acfc7ce3321179f, type: 2}

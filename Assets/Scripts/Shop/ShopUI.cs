@@ -6,9 +6,17 @@ using UnityEngine.UI;
 public class ShopUI : MonoBehaviour
 {
     public GameObject structureWindow, weaponWindow;
+    public GameObject structureContent, weaponContent;
     public Image structureButtonImage, weaponButtonImage;
+    [SerializeField] private Transform structureUIPrefab;
+    private Shop shop;
 
-    public void OnClickFortressButton()
+    void Awake()
+    {
+        shop = GameObject.FindGameObjectWithTag("Shop").GetComponent<Shop>();
+    }
+    
+    public void OnClickStructureButton()
     {
         structureWindow.SetActive(true);
         weaponWindow.SetActive(false);
@@ -31,5 +39,34 @@ public class ShopUI : MonoBehaviour
         Color color = buttonImage.color;
         color.a = alpha;
         buttonImage.color = color;
+    }
+
+    public void Display()
+    {
+        // Structure
+        for (var i = 0; i < shop.GetMaxStructure(); i++)
+        {
+            GameObject prefab = Instantiate(structureUIPrefab.gameObject, Vector3.zero, Quaternion.identity, structureContent.transform);
+            StructureUI structureUI = prefab.GetComponent<StructureUI>();
+
+            // structure info
+            structureUI.SetStructure(shop.RandomStructureReturner()); 
+            shop.AddDisplayStructure(structureUI.GetStructure());
+        }
+
+        // Weapon
+
+    }
+
+    public void ClearDisplayItems()
+    {
+        shop.ClearDisplayStructure();
+        
+        // Clear content child
+        while (structureContent.transform.childCount > 0)
+        {
+            GameObject structure = structureContent.transform.GetChild(0).gameObject;
+            Destroy(structure);
+        }
     }
 }
