@@ -8,12 +8,19 @@ public class ShopUI : MonoBehaviour
     public GameObject structureWindow, weaponWindow;
     public GameObject structureContent, weaponContent;
     public Image structureButtonImage, weaponButtonImage;
+    public Text money, life;
     [SerializeField] private Transform structureUIPrefab;
     private Shop shop;
 
     void Awake()
     {
         shop = GameObject.FindGameObjectWithTag("Shop").GetComponent<Shop>();
+    }
+
+    void Update()
+    {
+        if (shop != null && shop.isUIActive)
+            UpdateControlBox();
     }
 
     public void OnClickStructureButton()
@@ -34,11 +41,17 @@ public class ShopUI : MonoBehaviour
         SetButtonAlpha(structureButtonImage, 0.5f);
     }
 
-    void SetButtonAlpha(Image buttonImage, float alpha)
+    private void SetButtonAlpha(Image buttonImage, float alpha)
     {
         Color color = buttonImage.color;
         color.a = alpha;
         buttonImage.color = color;
+    }
+
+    private void UpdateControlBox()
+    {
+        this.money.text = "Money: " + Status.MONEY;
+        this.life.text = "Life: " + Status.LIFE;
     }
 
     public void Display()

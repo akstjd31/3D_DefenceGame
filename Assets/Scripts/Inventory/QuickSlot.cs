@@ -13,6 +13,7 @@ public class QuickSlot : MonoBehaviour
     [SerializeField] private Slot[] slots;
     [SerializeField] private List<Structure> structureList;
     private const int MAX_STRUCTURE = 3;
+    private int curIdx = 0;
     private KeyCode[] keyCodes = new KeyCode[]
     {
         KeyCode.Alpha1,
@@ -20,6 +21,8 @@ public class QuickSlot : MonoBehaviour
         KeyCode.Alpha3,
         KeyCode.Alpha4
     };
+
+    public Text itemName;
 
     private void Awake()
     {
@@ -41,6 +44,8 @@ public class QuickSlot : MonoBehaviour
                 ChangeSlot(i);
             }
         }
+
+        UpdateSlotItemNameText(curIdx);
     }
 
     public bool HasSpaceInStructureList()
@@ -61,7 +66,9 @@ public class QuickSlot : MonoBehaviour
 
     private void ChangeSlot(int idx)
     {
-        slots[idx].GetComponent<Image>().color = Color.green;
+        curIdx = idx;
+
+        slots[curIdx].GetComponent<Image>().color = Color.green;
         for (int i = 0; i < slots.Length; i++)
         {
             if (i != idx)
@@ -69,6 +76,11 @@ public class QuickSlot : MonoBehaviour
                 slots[i].GetComponent<Image>().color = Color.black;
             }
         }
+    }
+
+    private void UpdateSlotItemNameText(int idx)
+    {
+        itemName.text = slots[idx].structure != null ? slots[idx].structure.name : "None";
     }
 
     public void FreshSlot()

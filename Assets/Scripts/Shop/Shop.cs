@@ -69,11 +69,11 @@ public class Shop : MonoBehaviour
 
     public void Open()
     {
-        shopUI.Display();
-    
-        shopDisplay.SetActive(true);
-
         isUIActive = true;
+
+        shopUI.Display();
+        shopDisplay.SetActive(true);
+        
         SetCursorVisibility(isUIActive);
     }
 
