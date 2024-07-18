@@ -1,18 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Slot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] RawImage rawImage;
+
+    private Structure stru;
+
+    private void Start()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public Structure structure
     {
-        
+        get { return stru; }
+        set
+        {
+            stru = value;
+            if (structure != null)
+            {
+                rawImage.texture = structure.texture;
+            }
+            else
+            {
+                rawImage.texture = null;
+            }
+        }
     }
 }
+
+

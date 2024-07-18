@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class QuickSlot : MonoBehaviour
 {
-    ///////////////////////////////
+    ////////////////////////////////
+    // slot 1 ~ 3 :structure
+    // slot 4 : weapon
     // keyCodes.Length == slots.Length
+
     [SerializeField] private Slot[] slots;
-    private KeyCode[] keyCodes = new KeyCode[] 
+    [SerializeField] private List<Structure> structureList;
+    private const int MAX_STRUCTURE = 3;
+    private KeyCode[] keyCodes = new KeyCode[]
     {
         KeyCode.Alpha1,
         KeyCode.Alpha2,
@@ -19,6 +24,7 @@ public class QuickSlot : MonoBehaviour
     private void Awake()
     {
         slots = this.GetComponentsInChildren<Slot>();
+        structureList = new List<Structure>(MAX_STRUCTURE);
     }
 
     private void Start()
@@ -37,6 +43,22 @@ public class QuickSlot : MonoBehaviour
         }
     }
 
+    public bool HasSpaceInStructureList()
+    {
+        if (structureList.Count < MAX_STRUCTURE)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    
+    public void AddStructureList(Structure stru)
+    {
+        structureList.Add(stru);
+        FreshSlot();
+    }
+
     private void ChangeSlot(int idx)
     {
         slots[idx].GetComponent<Image>().color = Color.green;
@@ -46,6 +68,20 @@ public class QuickSlot : MonoBehaviour
             {
                 slots[i].GetComponent<Image>().color = Color.black;
             }
+        }
+    }
+
+    public void FreshSlot()
+    {
+        if (structureList.Count > 0)
+        {
+            // Structure
+            for (int i = 0; i < structureList.Count; i++)
+            {
+                slots[i].structure = structureList[i];
+            }
+
+            // Weapon
         }
     }
 }

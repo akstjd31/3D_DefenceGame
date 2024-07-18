@@ -10,7 +10,7 @@ public class Structure : ScriptableObject
     public Transform prefab;
     public string name;
     public Texture texture;
-    public float depensive;
+    public float defensive;
     public float attack;
     public float attackSpeed;
     public float durability;
