@@ -13,6 +13,13 @@ public class CameraCollision : MonoBehaviour
     Transform parentTransform;
     float defaultDistance;
 
+    PlayerCtrl playerCtrl;
+
+    void Awake()
+    {
+        playerCtrl = GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<PlayerCtrl>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,21 +36,31 @@ public class CameraCollision : MonoBehaviour
     // LateUpdate is called after Update
     void LateUpdate()
     {
-        Vector3 currentPos = defaultPos;
-        RaycastHit hit;
-        Vector3 dirTmp = parentTransform.TransformPoint(defaultPos) - referenceTransform.position;
-        if (Physics.SphereCast(referenceTransform.position, collisionOffset, dirTmp, out hit, defaultDistance))
+        if (playerCtrl.IsFPSMode())
         {
-            // Adjust the camera position based on collision, but maintain the center position
-            float distance = Mathf.Clamp(hit.distance - collisionOffset, 0, defaultDistance);
-            currentPos = directionNormalized * distance;
+            Vector3 newPos = new Vector3(0, 0.2f, 0.5f);
+
+            Vector3 currentPos = newPos;
+            transform.localPosition = Vector3.Lerp(transform.localPosition, currentPos, Time.deltaTime * cameraSpeed);
         }
         else
         {
-            currentPos = defaultPos;
-        }
+            Vector3 currentPos = defaultPos;
+            RaycastHit hit;
+            Vector3 dirTmp = parentTransform.TransformPoint(defaultPos) - referenceTransform.position;
+            if (Physics.SphereCast(referenceTransform.position, collisionOffset, dirTmp, out hit, defaultDistance))
+            {
+                // Adjust the camera position based on collision, but maintain the center position
+                float distance = Mathf.Clamp(hit.distance - collisionOffset, 0, defaultDistance);
+                currentPos = directionNormalized * distance;
+            }
+            else
+            {
+                currentPos = defaultPos;
+            }
 
-        // Smooth transition to the target position
-        transform.localPosition = Vector3.Lerp(transform.localPosition, currentPos, Time.deltaTime * cameraSpeed);
+            // Smooth transition to the target position
+            transform.localPosition = Vector3.Lerp(transform.localPosition, currentPos, Time.deltaTime * cameraSpeed);
+        }
     }
 }
