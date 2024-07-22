@@ -523,7 +523,6 @@ RectTransform:
   m_Children:
   - {fileID: 228185190}
   - {fileID: 1365747635}
-  - {fileID: 940757939}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -653,6 +652,66 @@ MonoBehaviour:
     BackgroundTexture: {fileID: 0}
     IsBackgroundRecursive: 0
     IsHidden: 0
+  - Type: 0
+    Name: 
+    GameObject: {fileID: 258721651}
+    Ordinal: 2
+    Priority: 0
+    IconType: 0
+    IconTexture: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 13000
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 0
+    Name: 
+    GameObject: {fileID: 155104271}
+    Ordinal: 3
+    Priority: 0
+    IconType: 0
+    IconTexture: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 5000
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 0
+    Name: 
+    GameObject: {fileID: 632684781}
+    Ordinal: 4
+    Priority: 0
+    IconType: 0
+    IconTexture: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 8000
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 0
+    Name: 
+    GameObject: {fileID: 2103920557}
+    Ordinal: 5
+    Priority: 0
+    IconType: 136000
+    IconTexture: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 5000
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 0
+    Name: 
+    GameObject: {fileID: 8432226019960932317}
+    Ordinal: 6
+    Priority: 0
+    IconType: 117450
+    IconTexture: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
 --- !u!4 &407572667
 Transform:
   m_ObjectHideFlags: 0
@@ -756,7 +815,8 @@ GameObject:
   - component: {fileID: 441838616}
   - component: {fileID: 441838615}
   - component: {fileID: 441838618}
-  m_Layer: 0
+  - component: {fileID: 441838619}
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Shop
   m_Icon: {fileID: 0}
@@ -868,6 +928,33 @@ MonoBehaviour:
   epicStructure: []
   legendaryStructure: []
   displayedStructure: []
+--- !u!54 &441838619
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441838613}
+  serializedVersion: 4
+  m_Mass: 1000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &451905432
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1380,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1895162727}
+  - {fileID: 940757939}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2224,7 +2312,7 @@ GameObject:
   - component: {fileID: 940757941}
   - component: {fileID: 940757940}
   m_Layer: 5
-  m_Name: ObjectName
+  m_Name: ItemName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2242,7 +2330,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 258721655}
+  m_Father: {fileID: 632684785}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3856,6 +3944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slots: []
   structureList: []
+  itemName: {fileID: 940757940}
 --- !u!114 &1895162729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4828,6 +4917,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopDetectionRange: 3
+  safeMat: {fileID: 2100000, guid: fcc34ec7f39204107a8ee44342d55a93, type: 2}
+  unsafeMat: {fileID: 2100000, guid: 7219a8138dfe643b6ac7922c0504a43c, type: 2}
+  curSlotItem: {fileID: 0}
+  itemSpawner: {fileID: 0}
+  playerCamera: {fileID: 70184455887405127}
+  maxRayDistance: 100
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  shopMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &7938973340087516126
 MonoBehaviour:
   m_ObjectHideFlags: 0

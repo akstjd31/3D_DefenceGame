@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8184510711407504856}
   - component: {fileID: 6581571248290280502}
   - component: {fileID: 2792318524558072778}
+  - component: {fileID: 7722976979505171091}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fcc34ec7f39204107a8ee44342d55a93, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,3 +108,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7722976979505171091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5243370834064923083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a81072a7d8c4c48bc950ef80d3441e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  safeMat: {fileID: 2100000, guid: fcc34ec7f39204107a8ee44342d55a93, type: 2}
+  unsafeMat: {fileID: 2100000, guid: 7219a8138dfe643b6ac7922c0504a43c, type: 2}
+  isCollisionShop: 0

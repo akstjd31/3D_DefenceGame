@@ -12,6 +12,7 @@ public class QuickSlot : MonoBehaviour
 
     [SerializeField] private Slot[] slots;
     [SerializeField] private List<Structure> structureList;
+    
     private const int MAX_STRUCTURE = 3;
     private int curIdx = 0;
     private KeyCode[] keyCodes = new KeyCode[]
@@ -48,12 +49,25 @@ public class QuickSlot : MonoBehaviour
         UpdateSlotItemNameText(curIdx);
     }
 
+    public Structure GetSlotItem()
+    {
+        return slots[curIdx].structure;
+    }
+
     public bool HasSpaceInStructureList()
     {
         if (structureList.Count < MAX_STRUCTURE)
         {
             return true;
         }
+
+        return false;
+    }
+
+    public bool IsItemInSlot()
+    {
+        if (slots[curIdx].structure != null)
+            return true;
 
         return false;
     }
@@ -91,6 +105,7 @@ public class QuickSlot : MonoBehaviour
             for (int i = 0; i < structureList.Count; i++)
             {
                 slots[i].structure = structureList[i];
+
             }
 
             // Weapon
