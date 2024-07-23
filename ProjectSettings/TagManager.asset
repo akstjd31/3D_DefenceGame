@@ -8,6 +8,7 @@ TagManager:
   - ShopCanvas
   - Slots
   - PlayerCanvas
+  - Object
   layers:
   - Default
   - TransparentFX

@@ -32,15 +32,19 @@ public class CollisionCheck : MonoBehaviour
 
         foreach (Collider col in colliders)
         {
-            if (col.tag.Equals("Shop"))
+            if (col.transform != this.transform)
             {
-                this.GetComponent<MeshRenderer>().material = unsafeMat;
-                isOverlap = true;
-            }
-            else
-            {
-                this.GetComponent<MeshRenderer>().material = safeMat;
-                isOverlap = false;
+                if (col.tag.Equals("Shop") || (col.tag.Equals("Object")))
+                {
+                    Debug.Log("Overlap object");
+                    this.GetComponent<MeshRenderer>().material = unsafeMat;
+                    isOverlap = true;
+                }
+                else
+                {
+                    this.GetComponent<MeshRenderer>().material = safeMat;
+                    isOverlap = false;
+                }
             }
         }
     }

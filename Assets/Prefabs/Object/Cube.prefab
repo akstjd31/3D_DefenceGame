@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7908505637054338575}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -120,5 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unsafeMat: {fileID: 2100000, guid: 7219a8138dfe643b6ac7922c0504a43c, type: 2}
   safeMat: {fileID: 2100000, guid: fcc34ec7f39204107a8ee44342d55a93, type: 2}
+  originMat: {fileID: 0}
   objectRange: 1
   isOverlap: 0
+  isPlaced: 0
