@@ -13,6 +13,12 @@ public class Slot : MonoBehaviour
     {
     }
 
+    private void Update()
+    {
+        // if (countText != null)
+        //     countText.text = count.ToString();
+    }
+
     public Structure structure
     {
         get { return stru; }

@@ -21,3 +21,4 @@ MonoBehaviour:
   durability: 10
   cost: 1
   ratingTable: 0
+  count: 5

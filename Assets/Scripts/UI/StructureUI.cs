@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class StructureUI : MonoBehaviour
 {
     private Structure structure;
-    public Text text, cost;
+    public Text itemName, cost;
     public RawImage rawImage;
     public Image image;
 
@@ -44,7 +44,7 @@ public class StructureUI : MonoBehaviour
 
     public void Init()
     {
-        this.text.text = structure.name;
+        this.itemName.text = structure.name;
         this.rawImage.texture = structure.texture;
 
         Color color = Color.gray;

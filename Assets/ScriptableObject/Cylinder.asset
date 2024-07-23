@@ -21,3 +21,4 @@ MonoBehaviour:
   durability: 40
   cost: 15
   ratingTable: 3
+  count: 1

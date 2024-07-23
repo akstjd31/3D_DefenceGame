@@ -4,21 +4,51 @@ using UnityEngine;
 
 public class CollisionCheck : MonoBehaviour
 {
-    public bool isCollisionShop = false;
+    public Material unsafeMat, safeMat;
+    [SerializeField] private Material originMat;
+    public float objectRange;
+    public bool isOverlap = false;
+    public bool isPlaced = false;
 
-    private void OnCollisionEnter(Collision col)
+    private void Awake()
     {
-        if (col.collider.CompareTag("Shop"))
+        originMat = this.GetComponent<MeshRenderer>().material;
+    }
+
+    private void Update()
+    {
+        if (!isPlaced)
+            OverlapCheck();
+    }
+
+    public void SetOriginMaterial()
+    {
+        this.GetComponent<MeshRenderer>().material = originMat;
+    }
+
+    private void OverlapCheck()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, objectRange);
+
+        foreach (Collider col in colliders)
         {
-            isCollisionShop = true;
+            if (col.tag.Equals("Shop"))
+            {
+                this.GetComponent<MeshRenderer>().material = unsafeMat;
+                isOverlap = true;
+            }
+            else
+            {
+                this.GetComponent<MeshRenderer>().material = safeMat;
+                isOverlap = false;
+            }
         }
     }
 
-    private void OnCollisionExit(Collision col)
+    private void OnDrawGizmosSelected()
     {
-        if (col.collider.CompareTag("Shop"))
-        {
-            isCollisionShop = false;
-        }
+        // range에 해당하는 기즈모 시각화
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, objectRange);
     }
 }

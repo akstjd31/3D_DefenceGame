@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fcc34ec7f39204107a8ee44342d55a93, type: 2}
+  - {fileID: 2100000, guid: f7e8ff9bd98dc4954a0514f9b775da95, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,7 +100,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a81072a7d8c4c48bc950ef80d3441e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  safeMat: {fileID: 2100000, guid: fcc34ec7f39204107a8ee44342d55a93, type: 2}
   unsafeMat: {fileID: 2100000, guid: 7219a8138dfe643b6ac7922c0504a43c, type: 2}
-  isCollisionShop: 0
+  safeMat: {fileID: 2100000, guid: fcc34ec7f39204107a8ee44342d55a93, type: 2}
+  objectRange: 1
+  isOverlap: 0

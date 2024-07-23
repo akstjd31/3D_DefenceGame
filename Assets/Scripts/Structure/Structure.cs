@@ -14,6 +14,7 @@ public class Structure : ScriptableObject
     public float attack;
     public float attackSpeed;
     public float durability;
-    public int cost;    
+    public int cost;
     public RATING_TABLE ratingTable;
+    public int count;
 }

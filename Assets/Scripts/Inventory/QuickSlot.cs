@@ -24,6 +24,7 @@ public class QuickSlot : MonoBehaviour
     };
 
     public Text itemName;
+    public bool isChangedSlot = false;
 
     private void Awake()
     {
@@ -47,6 +48,12 @@ public class QuickSlot : MonoBehaviour
         }
 
         UpdateSlotItemNameText(curIdx);
+    } 
+
+    public void UseItem()
+    {
+        structureList[curIdx] = null;
+        FreshSlot();
     }
 
     public Structure GetSlotItem()
@@ -90,6 +97,8 @@ public class QuickSlot : MonoBehaviour
                 slots[i].GetComponent<Image>().color = Color.black;
             }
         }
+
+        isChangedSlot = true;
     }
 
     private void UpdateSlotItemNameText(int idx)
@@ -105,7 +114,6 @@ public class QuickSlot : MonoBehaviour
             for (int i = 0; i < structureList.Count; i++)
             {
                 slots[i].structure = structureList[i];
-
             }
 
             // Weapon

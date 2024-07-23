@@ -13,7 +13,6 @@ public class PlayerInteraction : MonoBehaviour
     /////////////////////////////
     // Quickslot, curItem
     QuickSlot quickSlot;
-    public Material safeMat, unsafeMat;
     [SerializeField] private GameObject curSlotItem;
     [SerializeField] private GameObject itemSpawner;
     public Camera playerCamera;      // 플레이어의 카메라
@@ -65,25 +64,46 @@ public class PlayerInteraction : MonoBehaviour
             {
                 itemSpawner = Instantiate(curSlotItem, Vector3.zero, Quaternion.identity);
             }
-
-            Vector3 placementPosition = Vector3.zero;
-            if ((groundMask.value & (1 << hit.collider.gameObject.layer)) > 0)
+            else
             {
-                itemSpawner.GetComponent<MeshRenderer>().material = safeMat;
-
-                placementPosition = new Vector3(
-                    hit.point.x,
-                    hit.point.y + itemSpawner.transform.position.y / 2,
-                    hit.point.z
-                    );
+                if (quickSlot.isChangedSlot)
+                {
+                    Destroy(itemSpawner);
+                    quickSlot.isChangedSlot = false;
+                }
             }
 
-            CollisionCheck colCheck = itemSpawner.GetComponent<CollisionCheck>();
+            Vector3 placementPosition = Vector3.zero;
+
+
+            placementPosition = new Vector3(
+                hit.point.x,
+                hit.point.y + itemSpawner.transform.position.y / 2,
+                hit.point.z
+                );
 
             itemSpawner.transform.position = placementPosition;
 
             // 충돌한 표면의 법선 방향을 고려하여 오브젝트를 회전시킴
             Quaternion placementRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+
+            CollisionCheck colCheck = itemSpawner.GetComponent<CollisionCheck>();
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (!colCheck.isOverlap)
+                {
+                    quickSlot.UseItem();
+                    GameObject obj = Instantiate(curSlotItem, placementPosition, Quaternion.identity);
+                    CollisionCheck objColCheck = obj.GetComponent<CollisionCheck>();
+                    objColCheck.isPlaced = true;
+                    objColCheck.SetOriginMaterial();
+                }
+                else
+                {
+                    Debug.Log("Don't place object!");
+                }
+
+            }
         }
         else
         {
