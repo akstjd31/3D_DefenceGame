@@ -47,6 +47,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+
     void PlaceObject()
     {
         // 화면 중앙의 좌표
@@ -60,49 +61,59 @@ public class PlayerInteraction : MonoBehaviour
         // 레이캐스트 발사
         if (isGroundHit)
         {
-            if (itemSpawner == null)
+            // 표면이 위를 향하는지 확인 (임계값을 0.7로 설정, 이는 임의로 설정한 값으로 필요에 따라 조정 가능)
+            if (hit.normal.y > 0.7f)
             {
-                itemSpawner = Instantiate(curSlotItem, Vector3.zero, Quaternion.identity);
-            }
-            else
-            {
-                if (quickSlot.isChangedSlot)
+                if (itemSpawner == null)
                 {
-                    Destroy(itemSpawner);
-                    quickSlot.isChangedSlot = false;
-                }
-            }
-
-            Vector3 placementPosition = Vector3.zero;
-
-
-            placementPosition = new Vector3(
-                hit.point.x,
-                hit.point.y + itemSpawner.transform.position.y / 2,
-                hit.point.z
-                );
-
-            itemSpawner.transform.position = placementPosition;
-
-            // 충돌한 표면의 법선 방향을 고려하여 오브젝트를 회전시킴
-            Quaternion placementRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-
-            CollisionCheck colCheck = itemSpawner.GetComponent<CollisionCheck>();
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (!colCheck.isOverlap)
-                {
-                    quickSlot.UseItem();
-                    GameObject obj = Instantiate(curSlotItem, placementPosition, Quaternion.identity);
-                    CollisionCheck objColCheck = obj.GetComponent<CollisionCheck>();
-                    objColCheck.isPlaced = true;
-                    objColCheck.SetOriginMaterial();
+                    itemSpawner = Instantiate(curSlotItem, Vector3.zero, Quaternion.identity);
                 }
                 else
                 {
-                    Debug.Log("Don't place object!");
+                    if (quickSlot.isChangedSlot)
+                    {
+                        Destroy(itemSpawner);
+                        itemSpawner = Instantiate(curSlotItem, Vector3.zero, Quaternion.identity);
+                        quickSlot.isChangedSlot = false;
+                    }
                 }
 
+                // 오브젝트의 바운딩 박스 크기를 고려하여 배치 위치 조정
+                Bounds itemBounds = itemSpawner.GetComponent<Collider>().bounds;
+                float objectHeight = itemBounds.size.y;
+
+                Vector3 placementPosition = hit.point + new Vector3(0, objectHeight / 2, 0);
+
+                itemSpawner.transform.position = placementPosition;
+
+                // 충돌한 표면의 법선 방향을 고려하여 오브젝트를 회전시킴
+                Quaternion placementRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                itemSpawner.transform.rotation = placementRotation;
+
+                CollisionCheck colCheck = itemSpawner.GetComponent<CollisionCheck>();
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (colCheck.isSafetyZone && !Shop.isUIActive)
+                    {
+                        quickSlot.UseItem();
+                        GameObject obj = Instantiate(curSlotItem, placementPosition, placementRotation);
+                        CollisionCheck objColCheck = obj.GetComponent<CollisionCheck>();
+                        objColCheck.isPlaced = true;
+                        objColCheck.SetOriginMaterial();
+                    }
+                    else
+                    {
+                        Debug.Log("해당 오브젝트를 설치할 수 없습니다!");
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("옆면에는 설치할 수 없습니다!");
+                if (itemSpawner != null)
+                {
+                    Destroy(itemSpawner);
+                }
             }
         }
         else

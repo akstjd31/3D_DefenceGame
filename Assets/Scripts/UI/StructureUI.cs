@@ -13,14 +13,14 @@ public class StructureUI : MonoBehaviour
     public void OnClickBuyButton()
     {
         // Have money?
-        if (structure.cost <= Status.MONEY)
+        if (structure.cost <= GameManager.MONEY)
         {
             QuickSlot quickSlot = GameObject.FindGameObjectWithTag("Slots").GetComponent<QuickSlot>();
             
             // Have space? (slot)
             if (quickSlot.HasSpaceInStructureList())
             {
-                Status.MONEY -= structure.cost;
+                GameManager.MONEY -= structure.cost;
                 quickSlot.AddStructureList(structure);
 
                 Destroy(this.gameObject);

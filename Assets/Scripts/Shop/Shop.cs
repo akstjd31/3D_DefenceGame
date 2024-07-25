@@ -15,7 +15,7 @@ public class Shop : MonoBehaviour
     private ShopUI shopUI;
     private const int MAX_STRUCTURE = 5; // Max display
 
-    public bool isUIActive = false;
+    public static bool isUIActive = false;
 
     ///////////////////////////////
     // structure

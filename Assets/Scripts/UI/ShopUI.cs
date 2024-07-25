@@ -19,7 +19,7 @@ public class ShopUI : MonoBehaviour
 
     void Update()
     {
-        if (shop != null && shop.isUIActive)
+        if (shop != null && Shop.isUIActive)
             UpdateControlBox();
     }
 
@@ -50,8 +50,8 @@ public class ShopUI : MonoBehaviour
 
     private void UpdateControlBox()
     {
-        this.money.text = "Money: " + Status.MONEY;
-        this.life.text = "Life: " + Status.LIFE;
+        this.money.text = "Money: " + GameManager.MONEY;
+        this.life.text = "Life: " + GameManager.LIFE;
     }
 
     public void Display()
