@@ -9,6 +9,7 @@ TagManager:
   - Slots
   - PlayerCanvas
   - Object
+  - Path
   layers:
   - Default
   - TransparentFX

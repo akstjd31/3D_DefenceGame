@@ -14,8 +14,9 @@ public class GameManager : MonoBehaviour
     public static int LIFE = 20;
     public const int MAX_LIFE = 20;
     public static int MONEY = 10;
+    public int monsterCount = 10;
     
-    public const float MAINTENANCE_TIME = 120f;
+    public const float MAINTENANCE_TIME = 10f;
     public const float GAME_TIME = 180f;
     private bool isGameTime = false;
 
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     private GameState curState;
     private GameUI gameUI;
-    public Text round, money, life, mode, time;
+    public Text round, money, life, mode, time, monster;
     private float totalTime;
 
     public GameState GetGameState()
@@ -61,6 +62,8 @@ public class GameManager : MonoBehaviour
         ((int)(totalTime / 60)).ToString() + ":" + 
         ((totalTime % 60) < 10 ? "0" : "") +
         ((int)(totalTime % 60)).ToString();
+        
+        monster.text = "Monster: " + monsterCount.ToString();
     }
 
     private void UpdateUI()
@@ -76,7 +79,7 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.Maintenance);
         isGameTime = false;
 
-        ROUND += 1; LIFE = MAX_LIFE; totalTime = MAINTENANCE_TIME;
+        ROUND += 1; LIFE = MAX_LIFE; totalTime = MAINTENANCE_TIME; monsterCount = 0;
         UpdateUI();
     }
 
@@ -84,7 +87,7 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(GameState.Game);
         isGameTime = true;
-        totalTime = GAME_TIME;
+        totalTime = GAME_TIME; monsterCount = 10;
 
         UpdateUI();
     }

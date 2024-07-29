@@ -36,7 +36,10 @@ public class CollisionCheck : MonoBehaviour
         {
             if (col.transform != this.transform)
             {
-                if (col.tag.Equals("Shop") || col.tag.Equals("Object") || col.tag.Equals("Player"))
+                if (col.tag.Equals("Shop") ||
+                  col.tag.Equals("Object") ||
+                  col.tag.Equals("Player") ||
+                  col.tag.Equals("Path"))
                 {
                     this.GetComponent<MeshRenderer>().material = unsafeMat;
                     isSafetyZone = false;
